@@ -6,7 +6,7 @@ Function.prototype.call = function (context) {
     delete context.fn // 在删除掉
 }
 
-let obj = {
+const obj = {
     value: 1
 }
 
@@ -20,15 +20,15 @@ bar.call(obj)
 /* 没理解完 */
 Function.prototype.call1 = function (context) {
     context.fn = this
-    let arr = []
+    const arr = []
     for (let i = 1; i < arguments.length; i++) {
         arr.push('arguments[' + i + ']') // [arguments[1], arguments[2]]
     }
-    eval('context.fn(' + arr +')') // 这里会调用 Array.toString() 方法 不是那么明白eval只知道会执行
+    eval('context.fn(' + arr + ')') // 这里会调用 Array.toString() 方法 不是那么明白eval只知道会执行
     delete context.fn()
 }
 
-let obj1 = {
+const obj1 = {
     value: 2
 }
 
@@ -38,23 +38,22 @@ function bar1 (name, age) {
 
 bar1.call1(obj1, 'zxr', 18)
 
-
 /* 3. 解决this可以为null 函数也是有返回值 */
 Function.prototype.call2 = function (context) {
     context = context || window // 如果传入null 就指向window
     context.fn = this // 指向window 或者当前 函数
-    let arr = []
+    const arr = []
     for (let i = 1; i < arguments.length; i++) {
         arr.push('arguments[' + i + ']')
     }
-    let result = eval('context.fn(' + arr +')') // 接收返回的参数
+    const result = eval('context.fn(' + arr + ')') // 接收返回的参数
     delete context.fn()
     return result // 返回
 }
 
-let value = 2;
+const value = 2
 
-let obj2 = {
+const obj2 = {
     value: 1
 }
 
@@ -76,7 +75,6 @@ console.log(bar.call2(obj2, 'kevin', 18))
    age: 18
 } */
 
-
 /* apply模拟实现 */
 Function.prototype.apply = function (context, arr) {
     context = context || window
@@ -85,9 +83,8 @@ Function.prototype.apply = function (context, arr) {
     let result = 0
     if (!arr) { // 如果没有arr 参数 就直接执行
         result = context.fn()
-    }
-    else {
-        let args = []
+    } else {
+        const args = []
         for (let i = 0; i < arr.length; i++) {
             args.push('arr[' + i + ']')
         }
@@ -98,13 +95,11 @@ Function.prototype.apply = function (context, arr) {
     return result
 }
 
-let name = 'zxr'
-let arr = [1, 2, 3]
+const name = 'zxr'
+const arr = [1, 2, 3]
 
 function bar3 (arr) {
     console.log(this.name, arr)
 }
 
 bar3.apply(null, arr)
-
-
