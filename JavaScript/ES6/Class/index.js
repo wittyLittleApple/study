@@ -41,3 +41,15 @@ Object.assign(Point.prototype, { // 添加多个方法
 
     }
 })
+
+/* class 的继承 */
+class Point1 {
+
+}
+
+class PointText extends Point1 { // 通过 extends 继承 Point1 所有方法以及属性
+    constructor () {
+        super() // 使用 super 方法  用来新建父类的 this 得到与父类相同的实例属性和方法
+    }
+}
+
