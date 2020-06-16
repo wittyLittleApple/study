@@ -52,5 +52,4 @@ class PointText extends Point1 { // 通过 extends 继承 Point1 所有方法以
         super() // 使用 super 方法  用来新建父类的 this 得到与父类相同的实例属性和方法
     }
 }
-var a = 111
 
