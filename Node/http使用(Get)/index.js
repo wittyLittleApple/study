@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const http = require('http')
 const queryString = require('querystring')
-const urlLib = require('url')
+// const urlLib = require('url')
 
 /* createServer req进入 res出去 */
 http.createServer((req, res) => {
@@ -17,14 +17,19 @@ http.createServer((req, res) => {
         /* 如果为false query: a=111&b=222 */
         /* 如果为true query: { "a": "111", "b": "222" } */
         obj = urlLib.parse(req.url, true).query
-        /* 每次这么写比较麻烦 */
+        // /* 每次这么写比较麻烦 */
         let arr1 = arr[1].split('&')
         // user=123  password=123456
         for (let i = 0; i < arr1.length; i++) {
             let arr2 = arr1[i].split('=')
             obj[arr2[0]] = arr2[1]
         }
+        console.log(obj)
+        res.write('111')
+        res.end()
     } else {
         url = req.url // 否则就等于当前 url  /user
     }
-}).listen(8080) // 当前端口号 8080
+}).listen(8000, () => {
+    console.log('开启了')
+}) // 当前端口号 8080
